@@ -5,7 +5,7 @@ import Stars from '../components/useStars';
 import LoadingSpinner from '../components/Loading';
 import Link from 'next/link';
 
-function page() {
+function Page() {
   const searchParams = useSearchParams();
   const totalItems = searchParams.get('item')
   const totalItemsParse = JSON.parse(totalItems)
@@ -65,4 +65,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
