@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation';
 import Stars from '../components/useStars';
 import LoadingSpinner from '../components/Loading';
