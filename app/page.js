@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, [productsCount]);
+  }, [productsCount, fetchData]);
 
   const fetchData = async () => {
     try {
@@ -124,11 +124,11 @@ function App() {
 
         <main className="items-center w-full flex flex-col md:items-start gap-[1rem] md:flex-row justify-evenly">
           <select onChange={handleSelect} className="border-2 h-[50px] p-2">
-            <option value="1" name="1Star"><Stars rating={1} /></option>
-            <option value="2" name="2Stars"><Stars rating={2} /></option>
-            <option value="3" name="3Stars"><Stars rating={3} /></option>
-            <option value="4" name="4Stars"><Stars rating={4} /></option>
-            <option value="5" name="5Stars"><Stars rating={5} /></option>
+            <option value="1" name={`1Star`}><Stars rating={1} /></option>
+            <option value="2" name={`2Star`}><Stars rating={2} /></option>
+            <option value="3" name={`3Star`}><Stars rating={3} /></option>
+            <option value="4" name={`4Star`}><Stars rating={4} /></option>
+            <option value="5" name={`5Star`}><Stars rating={5} /></option>
           </select>
 
           <section className="flex flex-col" onFocus={handleFocus} onBlur={() => { setSearchAppear(false); handleFilterByName() }}>
