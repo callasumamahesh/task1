@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     fetchData();
-  }, [productsCount, fetchData]);
+  }, [productsCount]);
 
   const fetchData = async () => {
     try {
@@ -115,8 +115,8 @@ function App() {
           <h1 className="hidden md:block m-2 text-center font-bold">Select your Item</h1>
           <ul className="w-3/4 p-3 bg-gray-400 rounded-[1rem] gap-2 cursor-pointer flex justify-evenly text-white items-center h-auto sm:flex flex-col md:flex-row">
             <li onClick={() => fetchData()}>All Products</li>
-            <li onClick={() => handleCategory("men's clothing")}>Men's Clothing</li>
-            <li onClick={() => handleCategory("women's clothing")}>Women's Clothing</li>
+            <li onClick={() => handleCategory("men's clothing")}>Mens Clothing</li>
+            <li onClick={() => handleCategory("women's clothing")}>Womens Clothing</li>
             <li onClick={() => handleCategory("electronics")}>Electronics</li>
             <li onClick={() => handleCategory("jewelery")}>Jewelery</li>
           </ul>

@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import Stars from '../components/useStars';
 import LoadingSpinner from '../components/Loading';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function Page() {
   const searchParams = useSearchParams();
