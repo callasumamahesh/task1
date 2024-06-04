@@ -7,22 +7,30 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InnerPage />
+    </Suspense>
+  );
+}
+
+function InnerPage() {
   const searchParams = useSearchParams();
-  const totalItems = searchParams.get('item')
-  const totalItemsParse = JSON.parse(totalItems)
-  const [similarCategory, setSimilarCategory] = useState([])
-  const [loading, setLoading] = useState(true)
+  const totalItems = searchParams.get('item');
+  const totalItemsParse = JSON.parse(totalItems);
+  const [similarCategory, setSimilarCategory] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`https://fakestoreapi.com/products/category/${totalItemsParse.category}`);
-      const data = await res.json()
-      const filterData = data.filter((item) => item.id != totalItemsParse.id)
-      setSimilarCategory(filterData)
-      setLoading(false)
-    }
-    fetchData()
-  }, [])
+      const data = await res.json();
+      const filterData = data.filter((item) => item.id != totalItemsParse.id);
+      setSimilarCategory(filterData);
+      setLoading(false);
+    };
+    fetchData();
+  }, [totalItemsParse.category, totalItemsParse.id]);
 
   return (
     <div className='w-full flex flex-col overflowy-hidden'>
