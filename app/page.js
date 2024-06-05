@@ -6,7 +6,7 @@ import Products from './components/Products';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [productsCount, setProductsCount] = useState(12);
+  const [productsCount, setProductsCount] = useState(20);
   const [price, setPrice] = useState();
   const [name, setName] = useState('');
   const [searchAppear, setSearchAppear] = useState(false);
@@ -15,23 +15,23 @@ function App() {
   const [searchList, setSearchList] = useState([]);
   const [navbar, setNavBar] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
-        if(productsCount >= 20){
-          setProductsCount(20)
-        }
-        else{
-          setProductsCount((prev) => prev + 5);
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
+  //       if(productsCount >= 20){
+  //         setProductsCount(20)
+  //       }
+  //       else{
+  //         setProductsCount((prev) => prev + 5);
+  //       }
+  //     }
+  //   };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   useEffect(() => {
     fetchData();
@@ -106,7 +106,7 @@ function App() {
   return (
     <div className="w-full">
       <div className="flex justify-center gap-[1rem] mt-[1rem] items-center md:hidden">
-        <span onClick={() => setNavBar(!navbar)}><IoMdMenu /></span>
+        <span className='cursor-pointer' onClick={() => setNavBar(!navbar)}><IoMdMenu /></span>
         <span className="m-2 text-center font-bold">Select Your Item</span>
       </div>
   
