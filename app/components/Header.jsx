@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { FaShoppingCart } from "react-icons/fa";
 
 function Header() {
   const [user, setUser] = useState(false);
@@ -51,7 +52,7 @@ function Header() {
       <section className='w-[50%] flex justify-center'>
         {
           user ? <div className='flex gap-[2rem]'>
-            <button className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' onClick={() => handleCart()}>Cart</button>
+            <button className='w-[100px] bg-gray-400 p-[10px] flex justify-center items-center text-white text-[1.5rem] rounded-[7px]' onClick={() => handleCart()}><FaShoppingCart/></button>
             <button className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' onClick={handleSignOut}>Sign Out</button>
           </div> : <div className='flex gap-[2rem]'>
             <button onClick={handleSignIn} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]'>Sign in</button>

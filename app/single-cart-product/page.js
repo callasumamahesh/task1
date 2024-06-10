@@ -8,7 +8,7 @@ function SingleProductPage() {
   const searchParams = useSearchParams();
   const totalItems = searchParams.get('item');
   const totalItemsParse = JSON.parse(totalItems);
-
+  console.log(totalItemsParse.rating);
   const handleBuyNow = () => {
     router.push('/buynow/')
   }
@@ -39,11 +39,12 @@ function SingleProductPage() {
 
   }
   return (
+    
     <div className='w-full flex md:flex-row p-[2rem] flex-col'>
       <section className='w-full md:w-3/5 flex flex-col gap-[1rem] p-3'>
         <h1 className='text-[20px] font-bold'>{totalItemsParse.title}</h1>
         <p>{totalItemsParse.description}</p>
-        <Stars rating={totalItemsParse.rating.rate} />
+        <Stars rating={totalItemsParse.rating} />
         <p className='font-bold'>${totalItemsParse.price}</p>
         <div className='flex gap-[1rem]'>
           <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleRemoveCart(totalItemsParse.id)}>Remove From Cart</button>
