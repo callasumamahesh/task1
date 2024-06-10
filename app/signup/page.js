@@ -18,8 +18,8 @@ function Page() {
     }))
   }
 
-  const handleSignUp = () => {
-    if(details.email | details.password1 | details.password2 === ''){
+  const handleSignUp = async () => {
+    if(details.email ==='' || details.password1 === '' || details.password2 === ''){
       alert('Fields should not be Empty') 
     }
     else if(details.password1 != details.password2){
@@ -27,6 +27,27 @@ function Page() {
     }
     else{
       console.log(details);
+      const userdata = {email : details.email,password : details.password1}
+      const res = await fetch('/api/userget/',{
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify(userdata),
+      });
+
+      const data = await res.json();
+      if(res.ok){
+        if(data.message === 'User Created'){
+          alert(data.message)
+        }
+        else{
+          alert(data.message)
+        }
+      }
+      else{
+        alert('something wrong')
+      }
     }
   }
 
@@ -40,7 +61,7 @@ function Page() {
 
   return (
     <main className='w-full h-[80vh] flex justify-center items-center'>
-      <article className='p-[28px] flex flex-col items-center justify-center gap-[1rem] border-[2px] border-black p-[70px] rounded-[1rem] md:p-[70px]'>
+      <article className='p-[28px] flex flex-col items-center justify-center gap-[1rem] border-[2px] border-black rounded-[1rem] md:p-[70px]'>
         <h1 className='font-bold text-[1.5rem]'>Create An Account</h1>
         <input className='outline-none w-[300px] border-[2px] border-black p-[10px] rounded-[5px]' 
         onChange={(e) => handleChange(e)}

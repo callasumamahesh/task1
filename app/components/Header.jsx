@@ -3,38 +3,65 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 function Header() {
-  let user = false;
+  const [user, setUser] = useState(false);
+  const router = useRouter();
 
-  const router = useRouter()
-
-    const handlesignin = () => {
-      router.push('/signin')
-    }
-    const handlesignup = () => {
-      router.push('/signup')
+  useEffect(() => {
+    // Initialize localStorage item if it doesn't exist
+    if (localStorage.getItem('isuser') === null) {
+      localStorage.setItem('isuser', 'false');
     }
 
-    const handleSignOut = () => {
-      localStorage.removeItem('user')
-      router.push('/signin')
-    }
+    // Set initial state from localStorage
+    setUser(localStorage.getItem('isuser') === 'true');
+
+    // Event listener for localStorage changes
+    const handleStorageChange = () => {
+      setUser(localStorage.getItem('isuser') === 'true');
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  const handleSignIn = () => {
+    router.push('/signin');
+  };
+
+  const handleSignUp = () => {
+    router.push('/signup');
+  };
+
+  const handleCart = () => {
+    router.push('/cart')
+  }
+
+  const handleSignOut = () => {
+    localStorage.setItem('isuser', 'false');
+    window.dispatchEvent(new Event('storage')); // Trigger the storage event manually
+    router.push('/signin');
+  };
 
   return (
-    <div className='flex-col gap-[10px] text-black w-[90%] h-[50px] ml-[5%] mt-[1rem] flex justify-evenly items-center sm:flex-row'>
-        <h1>Take What You Want</h1>
-        <section>
+    <div className='flex-col gap-[10px] text-black w-[100%] h-[50px] mt-[1rem] flex justify-evenly items-center sm:flex-row'>
+      <h1 className='cursor-pointer w-[50%] text-center' onClick={() => router.push('/')}>Take What You Want</h1>
+      <section className='w-[50%] flex justify-center'>
         {
-            user ? <div className='flex gap-[1rem]'>
-            <button className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]'>Cart</button>
-            <button className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' onClick={() => handleSignOut()}>Sign Out</button>
-            </div> : <div className='flex gap-[1rem]'>
-            <button onClick={() => handlesignin()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]'>Sign in</button>
-            <button onClick={() => handlesignup()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]'>Sign up</button>
-        </div>
+          user ? <div className='flex gap-[2rem]'>
+            <button className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' onClick={() => handleCart()}>Cart</button>
+            <button className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' onClick={handleSignOut}>Sign Out</button>
+          </div> : <div className='flex gap-[2rem]'>
+            <button onClick={handleSignIn} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]'>Sign in</button>
+            <button onClick={handleSignUp} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]'>Sign up</button>
+          </div>
         }
-        </section>
+      </section>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;
+

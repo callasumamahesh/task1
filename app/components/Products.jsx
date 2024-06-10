@@ -7,7 +7,7 @@ import Image from 'next/image';
 function Products({ data, loading }) {
   return (
     <main>
-      {loading? (
+      {loading ? (
         <LoadingSpinner />
       ) : (
         <section className="grid gap-1 grid-cols-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2">

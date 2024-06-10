@@ -16,12 +16,44 @@ function Page() {
     }));
   };
 
-  const handleSignin = () => {
-    if(details.email | details.password === ''){
+  const handleSignin = async () => {
+    if(details.email === '' || details.password === ''){
       alert('Fields should not be Empty') 
     }
     else{
       console.log(details);
+      try {
+        const res = await fetch('/api/isuser',{
+          method : 'POST',
+          body : JSON.stringify({email : details.email,password : details.password}),
+          headers : {
+            'Content-Type':'application/json'
+          }
+        })
+        const data = await res.json()
+        if(res.ok){
+          if(data.message === 'User Not Found'){
+            alert(data.message)
+          }
+          else if(data.message === 'check Your Password Once'){
+            alert(data.message)
+          }
+          else if(data.message === 'Something Wrong'){
+            alert(data.message)
+          }
+          else{
+            localStorage.setItem('isuser',true);
+            localStorage.setItem('useremail',details.email)
+            window.dispatchEvent(new Event('storage'));
+            router.push('/')
+          }
+        }
+        else{
+          console.log('Something Wrong');
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 

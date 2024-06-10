@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 function Page() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div><LoadingSpinner /></div>}>
       <InnerPage />
     </Suspense>
   );
@@ -20,6 +20,7 @@ function InnerPage() {
   const totalItemsParse = JSON.parse(totalItems);
   const [similarCategory, setSimilarCategory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const userEmail = localStorage.getItem('useremail')
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +33,46 @@ function InnerPage() {
     fetchData();
   }, [totalItemsParse.category, totalItemsParse.id]);
 
+
+  const handleCart = async () => {
+    try{
+      const isuserinLocal = localStorage.getItem('isuser');
+      if(isuserinLocal == 'false'){
+        alert('For adding products into your cart you should signup first')
+      }
+      else{
+        console.log('already user')
+        const res = await fetch('/api/cart',{
+          method : 'POST',
+          body: JSON.stringify({userEmail:userEmail,id:totalItemsParse.id,title:totalItemsParse.title,price:totalItemsParse.price,description:totalItemsParse.description,category:totalItemsParse.category,image:totalItemsParse.image,rating:totalItemsParse.rating.rate}),
+          headers : {
+            'Content-type':'json/application',
+          },
+        })
+        const data = await res.json()
+        console.log(data);
+        if(data.message === 'Product Added'){
+          alert('Product added to your cart')
+        } 
+        else{
+          alert('From Page')
+        }
+      }
+    }
+    catch(error){
+      alert("Error",error)
+    }
+  }
+  const handleBuynow = () => {
+    const isuserinLocal = localStorage.getItem('isuser');
+    if(isuserinLocal == 'false'){
+      alert('To buy the products you first signup')
+    }
+    else{
+      alert('already user')
+    }
+  }
+
   return (
     <div className='w-full flex flex-col overflowy-hidden'>
       <main className='w-full flex md:flex-row p-[2rem] flex-col'>
@@ -41,9 +82,19 @@ function InnerPage() {
           <Stars rating={totalItemsParse.rating.rate} />
           <p className='font-bold'>${totalItemsParse.price}</p>
           <div className='flex gap-[1rem]'>
-            <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]'>Add to Cart</button>
-            <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]'>Buy Now</button>
+            <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleCart()}>Add to Cart</button>
+            <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleBuynow()}>Buy Now</button>
           </div>
+
+{/* 
+
+<button>Buy Now</button>
+<button>Remove from Cart</button>
+
+*/}
+
+
+
         </section>
         <section className='sm:w-full md:w-2/5 flex justify-center'>
           <img className='w-[300px] h-[300px] float-center' src={totalItemsParse.image} />
