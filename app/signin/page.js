@@ -55,7 +55,7 @@ function Page() {
           alert('Something Wrong');
         }
       } catch (error) {
-        console.log(error);
+        alert(error);
       }
     }
   }

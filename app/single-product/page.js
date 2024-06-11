@@ -41,7 +41,6 @@ function InnerPage() {
         alert('For adding products into your cart you should signup first')
       }
       else{
-        console.log('already user')
         const res = await fetch('/api/cart',{
           method : 'POST',
           body: JSON.stringify({userEmail:userEmail,id:totalItemsParse.id,title:totalItemsParse.title,price:totalItemsParse.price,description:totalItemsParse.description,category:totalItemsParse.category,image:totalItemsParse.image,rating:totalItemsParse.rating.rate}),
@@ -50,7 +49,6 @@ function InnerPage() {
           },
         })
         const data = await res.json()
-        console.log(data);
         if(data.message === 'Product Added'){
           alert('Product added to your cart')
         } 
@@ -85,14 +83,6 @@ function InnerPage() {
             <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleCart()}>Add to Cart</button>
             <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleBuynow()}>Buy Now</button>
           </div>
-
-{/* 
-
-<button>Buy Now</button>
-<button>Remove from Cart</button>
-
-*/}
-
 
 
         </section>

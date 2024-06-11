@@ -2,16 +2,13 @@
 import React from 'react'
 import Stars from '../components/useStars'
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 function SingleProductPage() {
   const router = useRouter()
   const searchParams = useSearchParams();
   const totalItems = searchParams.get('item');
   const totalItemsParse = JSON.parse(totalItems);
-  console.log(totalItemsParse.rating);
-  const handleBuyNow = () => {
-    router.push('/buynow/')
-  }
 
   const handleRemoveCart = async (id) => {
     try {
@@ -48,7 +45,12 @@ function SingleProductPage() {
         <p className='font-bold'>${totalItemsParse.price}</p>
         <div className='flex gap-[1rem]'>
           <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleRemoveCart(totalItemsParse.id)}>Remove From Cart</button>
-          <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleBuyNow()}>Buy Now</button>
+          <Link href={{
+            pathname : '/buynow',
+            query : {item : JSON.stringify(totalItemsParse)}
+          }}>
+            <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]'>Buy Now</button>
+          </Link>
         </div>
       </section>
       <section className='sm:w-full md:w-2/5 flex justify-center'>

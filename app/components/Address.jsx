@@ -9,7 +9,7 @@ function Address() {
                 <input type="number" className='border-2 border-black p-[7px] outline-none rounded-[7px]' placeholder='Enter Your Phone Number' />
             </section>
             <textarea name="" id="" cols="30" rows="10" className='border-2 border-black p-[7px] outline-none rounded-[7px]' placeholder='Enter your Address'></textarea>
-            <button>Next</button>
+            {/* <button className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button> */}
         </div>
     )
 }

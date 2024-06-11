@@ -1,26 +1,3 @@
-// import { NextResponse } from "next/server";
-// import users from "@/app/models/usermodel";
-
-// export async function POST(req){
-//     try {
-//      if(req.method === 'POST'){
-//         const {id,userEmail} = await req.json();
-//         console.log(id,userEmail);
-//         const IsUser = await users.findOne({email : userEmail})
-//         console.log(IsUser.cart); 
-//         const removeItem = await IsUser.cart.findOneAndDelete({id}) 
-//         console.log(removeItem)
-//         return NextResponse.json({message:'Item Removed'})
-//      }  
-//      else{
-//         return NextResponse.json({message:'Invalid Method'})
-//      } 
-//     } catch (error) {
-//         console.log(error);
-//         return NextResponse.json({message:'Invalid Method'})
-//     }
-// }
-
 import { NextResponse } from "next/server";
 import users from "@/app/models/usermodel";
 
@@ -28,7 +5,6 @@ export async function POST(req){
     try {
         if(req.method === 'POST'){
             const { id, userEmail } = await req.json();
-            console.log(id, userEmail);
             
             const IsUser = await users.findOne({ email: userEmail });
             if (!IsUser) {
@@ -48,7 +24,6 @@ export async function POST(req){
             return NextResponse.json({ message: 'Invalid Method' });
         }
     } catch (error) {
-        console.log(error);
         return NextResponse.json({ message: 'Error removing item' });
     }
 }
