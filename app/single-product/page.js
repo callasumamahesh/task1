@@ -1,6 +1,6 @@
 "use client"
 import React, { Suspense, useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Stars from '../components/useStars';
 import LoadingSpinner from '../components/Loading';
 import Link from 'next/link';
@@ -21,6 +21,7 @@ function InnerPage() {
   const [similarCategory, setSimilarCategory] = useState([]);
   const [loading, setLoading] = useState(true);
   const userEmail = localStorage.getItem('useremail')
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +54,7 @@ function InnerPage() {
           alert('Product added to your cart')
         } 
         else{
-          alert('From Page')
+          alert('Something Wrong')
         }
       }
     }
@@ -61,13 +62,11 @@ function InnerPage() {
       alert("Error",error)
     }
   }
+
   const handleBuynow = () => {
     const isuserinLocal = localStorage.getItem('isuser');
     if(isuserinLocal == 'false'){
       alert('To buy the products you first signup')
-    }
-    else{
-      alert('already user')
     }
   }
 
@@ -81,10 +80,14 @@ function InnerPage() {
           <p className='font-bold'>${totalItemsParse.price}</p>
           <div className='flex gap-[1rem]'>
             <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleCart()}>Add to Cart</button>
-            <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleBuynow()}>Buy Now</button>
+            {/* <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleBuynow()}>Buy Now</button> */}
+            <Link href={{
+              pathname:'/buynow',
+              query: { item: JSON.stringify(totalItemsParse) }
+            }}>
+              <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleBuynow()}>Buy Now</button>
+            </Link>
           </div>
-
-
         </section>
         <section className='sm:w-full md:w-2/5 flex justify-center'>
           <img className='w-[300px] h-[300px] float-center' src={totalItemsParse.image} />

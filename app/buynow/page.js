@@ -6,21 +6,26 @@ import ChoosePayment from '../components/ChoosePayment';
 import { useSearchParams } from 'next/navigation';
 import CheckOut from '../components/CheckOut';
 import Stars from '../components/useStars';
+import Finish from '../components/Finish';
 
 function BuyNow() {
     const searchParams = useSearchParams()
     const totalItems = searchParams.get('item')
     const totalItemsParse = JSON.parse(totalItems)
+
     const [image, setImage] = useState(true)
     const [address, setAddress] = useState(false);
     const [addmethod, setAddMethod] = useState(false)
     const [choosemethod, setChooseMethod] = useState(false)
     const [checkout, setCheckout] = useState(false)
+    const [final,setFinal] = useState(false)
+
     const handleAddress = () => {
         setImage(false)
         setAddMethod(false)
         setAddress(true)
         setChooseMethod(false)
+        setFinal(false)
         setCheckout(false)
     }
     const handlePaymentMethod = () => {
@@ -28,6 +33,7 @@ function BuyNow() {
         setAddress(false)
         setAddMethod(true)
         setCheckout(false)
+        setFinal(false)
         setChooseMethod(false)
     }
     const handlechooseMethod = () => {
@@ -36,12 +42,23 @@ function BuyNow() {
         setAddMethod(false)
         setCheckout(false)
         setChooseMethod(true)
+        setFinal(false)
+
     }
     const handleCheckOut = () => {
         setImage(false)
         setAddress(false)
         setAddMethod(false)
         setCheckout(true)
+        setFinal(false)
+        setChooseMethod(false)
+    }
+    const handleFinal = () => {
+        setFinal(true)
+        setImage(false)
+        setAddress(false)
+        setAddMethod(false)
+        setCheckout(false)
         setChooseMethod(false)
     }
     return (
@@ -110,7 +127,7 @@ function BuyNow() {
                                 </div>
                             </div>
                             <div className="flex relative">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
+                                <div onClick={() => handleFinal()} className="cursor-pointer flex-shrink-0 w-10 h-10 rounded-full bg-indigo-500 inline-flex items-center justify-center text-white relative z-10">
                                     <svg fill="none" stroke="currentColor" storkelinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                                         <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                                         <path d="M22 4L12 14.01l-3-3"></path>
@@ -125,13 +142,13 @@ function BuyNow() {
                         {
                             image ? <>
                                 <img className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12" src="https://www.amazonlistingservice.com/wp-content/uploads/2022/04/step-by-step-guide-on-how-to-sell-products-on-amazon.jpg" alt="step" />
-                                <button onClick={() => handleAddress()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button>
+                                <button onClick={() => handleAddress()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
                             </> : <></>
                         }
                         {
                             address ? <>
                                 <Address />
-                                <button onClick={() => handlePaymentMethod()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button>
+                                <button onClick={() => handlePaymentMethod()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
 
                             </> : <></>
                             // <img className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12" src="https://www.amazonlistingservice.com/wp-content/uploads/2022/04/step-by-step-guide-on-how-to-sell-products-on-amazon.jpg" alt="step" />
@@ -139,14 +156,14 @@ function BuyNow() {
                         {
                             addmethod ? <>
                                 <AddPayment />
-                                <button onClick={() => handlechooseMethod()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button>
+                                <button onClick={() => handlechooseMethod()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
                             </> : <></>
                         }
                         {
                             choosemethod ?
                                 <>
                                     <ChoosePayment />
-                                    <button onClick={() => handleCheckOut()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button>
+                                    <button onClick={() => handleCheckOut()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
                                 </> : <></>
                         }
                         {
@@ -158,10 +175,10 @@ function BuyNow() {
                                 <section className='w-full flex flex-col gap-[1rem] p-3'>
                                     <h1 className='text-[20px] font-bold'>{totalItemsParse.title}</h1>
                                     <p>{totalItemsParse.description}</p>
-                                    <Stars rating={totalItemsParse.rating} />
+                                    <Stars rating={totalItemsParse.rating.rate} />
                                     <p className='font-bold'>${totalItemsParse.price}</p>
                                     <div className='flex gap-[1rem]'>
-                                        <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]'>Check Out</button>
+                                        <button className='w-[200px] p-[10px] bg-gray-500 text-white rounded-[6px]' onClick={() => handleFinal()} >Check Out</button>
                                     </div>
                                 </section>
                                 <section className='sm:w-full flex justify-center'>
@@ -170,10 +187,13 @@ function BuyNow() {
                                 </section>
 
                             </div> 
-                            <button onClick={() => handleCheckOut()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button>
+                            <button onClick={() => handleFinal()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button>
                             </>
                             : <></>
                         }
+                            {
+                                final ? <Finish/> : <></>
+                            }
                     </div>
                 </div>
             </section>

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Stars from './components/useStars';
-import { IoMdMenu } from "react-icons/io";
+import { IoMenu } from "react-icons/io5";
 import Products from './components/Products';
 
 function App() {
@@ -106,7 +106,7 @@ function App() {
   return (
     <div className="w-full">
       <div className="flex justify-center gap-[1rem] mt-[1rem] items-center md:hidden">
-        <span className='cursor-pointer' onClick={() => setNavBar(!navbar)}><IoMdMenu /></span>
+        <span className='cursor-pointer' onClick={() => setNavBar(!navbar)}><IoMenu /></span>
         <span className="m-2 text-center font-bold">Select Your Item</span>
       </div>
   

@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { FaShoppingCart } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 
 function Header() {
   const [user, setUser] = useState(false);
@@ -48,7 +49,10 @@ function Header() {
 
   return (
     <div className='flex-col gap-[10px] text-black w-[100%] h-[50px] mt-[1rem] flex justify-evenly items-center sm:flex-row'>
-      <h1 className='cursor-pointer w-[50%] text-center' onClick={() => router.push('/')}>Take What You Want</h1>
+      <section className='flex justify-center items-center gap-[1rem] w-[50%] text-center'>
+      <FaHome onClick={() => router.push('/') } className='cursor-pointer text-[1.3rem]'/>
+      <h1>Take What You Want</h1>
+      </section>
       <section className='w-[50%] flex justify-center'>
         {
           user ? <div className='flex gap-[2rem]'>
