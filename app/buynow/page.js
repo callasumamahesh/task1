@@ -120,10 +120,11 @@
 import React, { Suspense } from 'react';
  // Adjust the import path based on your project structure
 import Buyproduct from '../components/Buyproduct'
+import LoadingSpinner from '../components/Loading';
 
 function BuyNowPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div><LoadingSpinner /></div>}>
       <Buyproduct />
     </Suspense>
   );
