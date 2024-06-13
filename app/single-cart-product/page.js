@@ -68,6 +68,7 @@ import React, { Suspense } from 'react'
 import Stars from '../components/useStars'
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 
 function SingleProductPage() {
   const router = useRouter()
@@ -87,14 +88,30 @@ function SingleProductPage() {
       })
       const data = await res.json();
       if (data.message === "Item not found in cart") {
-        alert('Item not found in cart')
+        Swal.fire('Item not found in cart')
       } else if (data.message === 'Item Removed') {
-        alert('Item Removed')
-      } else {
-        alert(data.message)
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "product removed from your cart",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } 
+      else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       }
-    } catch (error) {
-      alert(error)
+    } 
+    catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   }
 

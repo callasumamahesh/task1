@@ -68,7 +68,7 @@ function App() {
 
   const handleFilterByName = () => {  
       if(name===''){
-
+        return 
       } 
       else{
         const newSearchItem = name;

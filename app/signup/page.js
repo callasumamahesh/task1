@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { IoEye } from "react-icons/io5";
 import { IoEyeOff } from "react-icons/io5";
 import LoadingSpinner from '../components/Loading';
+import Swal from 'sweetalert2';
 function Page() {
   const [loading, setLoading] = useState(false)
   const [password1, setPassword1] = useState(false)
@@ -23,11 +24,11 @@ function Page() {
     setLoading(true)
     if (details.email === '' || details.password1 === '' || details.password2 === '') {
       setLoading(false)
-      alert('Fields should not be Empty')
+      Swal.fire("Fields should not be Empty");
     }
     else if (details.password1 != details.password2) {
       setLoading(false)
-      alert('Passwords are Not Matching')
+      Swal.fire("Passwords are Not Matching");
     }
     else {
       const userdata = { email: details.email, password: details.password1 }
@@ -43,16 +44,26 @@ function Page() {
       if (res.ok) {
         if (data.message === 'User Created') {
           setLoading(false)
-          alert(data.message)
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "User Created",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
         else {
           setLoading(false)
-          alert(data.message)
+          Swal.fire(data.message);
         }
       }
       else {
         setLoading(false)
-        alert('something wrong')
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          });
       }
     }
   }

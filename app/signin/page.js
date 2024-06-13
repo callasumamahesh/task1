@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import LoadingSpinner from '../components/Loading';
+import Swal from 'sweetalert2';
 
 function Page() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +22,8 @@ function Page() {
   const handleSignin = async () => {
     setLoading(true)
     if (details.email === '' || details.password === '') {
-      alert('Fields should not be Empty')
+      Swal.fire("Fields should not be Empty");
+      setLoading(false)
     }
     else {
       try {
@@ -35,13 +37,17 @@ function Page() {
         const data = await res.json()
         if (res.ok) {
           if (data.message === 'User Not Found') {
-            alert(data.message)
+            Swal.fire(data.message);
           }
           else if (data.message === 'check Your Password Once') {
-            alert(data.message)
+            Swal.fire(data.message)
           }
           else if (data.message === 'Something Wrong') {
-            alert(data.message)
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
           }
           else {
             localStorage.setItem('isuser', true);
@@ -52,10 +58,14 @@ function Page() {
           setLoading(false)
         }
         else {
-          alert('Something Wrong');
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
         }
       } catch (error) {
-        alert(error);
+        Swal.fire(error)
       }
     }
   }

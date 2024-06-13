@@ -5,6 +5,7 @@ import Stars from '../components/useStars';
 import LoadingSpinner from '../components/Loading';
 import Link from 'next/link';
 import Image from 'next/image';
+import Swal from 'sweetalert2';
 
 function Page() {
   return (
@@ -38,8 +39,25 @@ function InnerPage() {
   const handleCart = async () => {
     try{
       const isuserinLocal = localStorage.getItem('isuser');
+
       if(isuserinLocal == 'false'){
-        alert('For adding products into your cart you should signup first')
+        Swal.fire({
+          title: "For adding products into your cart you should signup first",
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `
+          }
+        });
       }
       else{
         const res = await fetch('/api/cart',{
@@ -51,22 +69,53 @@ function InnerPage() {
         })
         const data = await res.json()
         if(data.message === 'Product Added'){
-          alert('Product added to your cart')
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Product added to your cart",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          
         } 
         else{
-          alert('Something Wrong')
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
         }
       }
     }
     catch(error){
-      alert("Error",error)
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   }
 
   const handleBuynow = () => {
     const isuserinLocal = localStorage.getItem('isuser');
     if(isuserinLocal == 'false'){
-      alert('To buy the products you first signup')
+      Swal.fire({
+        title: "To buy the products you first signup",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
     }
   }
 
