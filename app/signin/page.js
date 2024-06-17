@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import LoadingSpinner from '../components/Loading';
 import Swal from 'sweetalert2';
-
 function Page() {
   const [showPassword, setShowPassword] = useState(false);
   const [details, setDetails] = useState({ email: '', password: '' });
@@ -50,7 +49,7 @@ function Page() {
             });
           }
           else {
-            localStorage.setItem('isuser', true);
+            localStorage.setItem('isuser1', true);
             localStorage.setItem('useremail', details.email)
             window.dispatchEvent(new Event('storage'));
             router.push('/')

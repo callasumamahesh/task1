@@ -38,9 +38,9 @@ function InnerPage() {
 
   const handleCart = async () => {
     try{
-      const isuserinLocal = localStorage.getItem('isuser');
+      const isuserinLocal = localStorage.getItem('isuser1');
 
-      if(isuserinLocal == 'false'){
+      if(isuserinLocal == null){
         Swal.fire({
           title: "For adding products into your cart you should signup first",
           showClass: {
@@ -97,8 +97,8 @@ function InnerPage() {
   }
 
   const handleBuynow = () => {
-    const isuserinLocal = localStorage.getItem('isuser');
-    if(isuserinLocal == 'false'){
+    const isuserinLocal = localStorage.getItem('isuser1');
+    if(isuserinLocal == null){
       Swal.fire({
         title: "To buy the products you first signup",
         showClass: {
@@ -127,8 +127,8 @@ function InnerPage() {
           <p>{totalItemsParse.description}</p>
           <Stars rating={totalItemsParse.rating.rate} />
           <p className='font-bold'>${totalItemsParse.price}</p>
-          <div className='flex gap-[1rem]'>
-            <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleCart()}>Add to Cart</button>
+          <div className='flex gap-[1rem] flex-col md:flex-row'>
+            <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleCart()}>Add to Cart</button>
             {/* <button className='w-[150px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleBuynow()}>Buy Now</button> */}
             <Link href={{
               pathname:'/buynow',

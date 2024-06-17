@@ -142,13 +142,13 @@ function BuyNow() {
                         {
                             image ? <>
                                 <img className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12" src="https://www.amazonlistingservice.com/wp-content/uploads/2022/04/step-by-step-guide-on-how-to-sell-products-on-amazon.jpg" alt="step" />
-                                <button onClick={() => handleAddress()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
+                                <button onClick={() => handleAddress()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px] mt[1rem]' >Next</button>
                             </> : <></>
                         }
                         {
                             address ? <>
                                 <Address />
-                                <button onClick={() => handlePaymentMethod()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
+                                <button onClick={() => handlePaymentMethod()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px] mt[1rem]' >Next</button>
 
                             </> : <></>
                             // <img className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12" src="https://www.amazonlistingservice.com/wp-content/uploads/2022/04/step-by-step-guide-on-how-to-sell-products-on-amazon.jpg" alt="step" />
@@ -156,14 +156,14 @@ function BuyNow() {
                         {
                             addmethod ? <>
                                 <AddPayment />
-                                <button onClick={() => handlechooseMethod()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
+                                <button onClick={() => handlechooseMethod()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px] mt[1rem]' >Next</button>
                             </> : <></>
                         }
                         {
                             choosemethod ?
                                 <>
                                     <ChoosePayment />
-                                    <button onClick={() => handleCheckOut()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px]' >Next</button>
+                                    <button onClick={() => handleCheckOut()} className='w-[100px] bg-gray-500 p-[10px] text-white rounded-[7px] mt[1rem]' >Next</button>
                                 </> : <></>
                         }
                         {
@@ -178,7 +178,7 @@ function BuyNow() {
                                     <Stars rating={totalItemsParse.rating} />
                                     <p className='font-bold'>${totalItemsParse.price}</p>
                                     <div className='flex gap-[1rem]'>
-                                        <button className='w-[200px] p-[10px] bg-gray-500 text-white rounded-[6px]' onClick={() => handleFinal()} >Check Out</button>
+                                        <button className='w-[200px] p-[10px] bg-gray-500 text-white rounded-[6px] mt[1rem]' onClick={() => handleFinal()} >Check Out</button>
                                     </div>
                                 </section>
                                 <section className='sm:w-full flex justify-center'>
@@ -187,7 +187,7 @@ function BuyNow() {
                                 </section>
 
                             </div> 
-                            <button onClick={() => handleFinal()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px]' >Next</button>
+                            <button onClick={() => handleFinal()} className='w-[100px] bg-gray-400 p-[10px] text-white rounded-[7px] mt[1rem]' >Next</button>
                             </>
                             : <></>
                         }

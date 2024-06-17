@@ -58,7 +58,7 @@ function SingleProductPage() {
           <p>{totalItemsParse.description}</p>
           <Stars rating={totalItemsParse.rating} />
           <p className='font-bold'>${totalItemsParse.price}</p>
-          <div className='flex gap-[1rem]'>
+          <div className='flex gap-[1rem] flex-col md:flex-row'>
             <button className='w-[200px] p-[10px] bg-gray-400 text-white rounded-[6px]' onClick={() => handleRemoveCart(totalItemsParse.id)}>Remove From Cart</button>
             <Link href={{
               pathname: '/buynow',

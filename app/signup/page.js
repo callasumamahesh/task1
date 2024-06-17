@@ -11,7 +11,6 @@ function Page() {
   const [password2, setPassword2] = useState(false)
   const [details, setDetails] = useState({ email: '', password1: '', password2: '' })
   let router = useRouter()
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDetails((prev) => ({
